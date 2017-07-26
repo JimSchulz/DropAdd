@@ -1,0 +1,424 @@
+/* Student Drop/Add CSS ***************************************************************************/
+
+body, html {
+  font-size: 100%;
+  color: #537286;
+  font-family: OpenSans-regular;
+  background-color: #E2E4E4;
+}
+
+#content {
+  font-size: 100%;
+}
+
+h1 {
+  font-size: 175%;
+  background-color: #FFFFFF;
+  padding: 0.50em 0.50em;
+}
+
+/* Header Styles *********************************************************************************/
+#header-main-section {
+  background: #D09B2C;
+}
+.institutionalBranding {
+  background-image: url("https://banxet.coloradocollege.edu/institutionLogo.png");
+  width: 11em;
+}
+#header-main-section-east-part {
+  background-color: transparent;
+}
+#header-main-section-east-part #toolsButton, #header-main-section-east-part #userDiv {
+  border-left: 1px #ffffff solid;
+}
+
+/* Block Styles ***********************************************************************************/
+.blocks {
+  background-color: #FFFFFF;
+  color: #333333;
+  padding: 0.75em 0.75em;
+}
+.blockForm {
+  background-color: #FFFFFF;
+  color: #333333;
+  padding: 0.1em 0.25em 1em 0.25em;
+  text-align: center;
+}
+.blockSpace {
+  background-color: #E2E4E4;
+  padding: 0em;
+}
+.blockLookup {  /* Uses Flex Row to keep Lookup items horizontally aligned */
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  
+  -webkit-align-items: center;
+  align-items: center;
+
+  -webkit-justify-content: center;
+  justify-content: center;
+  
+  background-color: #FFFFFF;
+  color: #333333;
+  white-space: nowrap;
+}
+.blockAddEntry {
+  display: -webkit-flex;
+  display: flex;
+  
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  
+  -webkit-align-items: left;
+  align-items: left;
+
+  -webkit-justify-content: left;
+  justify-content: left;
+  
+  background-color: #FFFFFF;
+  color: #333333;
+  white-space: nowrap;
+}
+.pb-block-label {
+  font-size: 1.2em;
+}
+
+/* Add space between flex elements *********************************************************/
+.flex.vertical { margin: -7px; }
+.flex > * { margin: 0 7px; }    
+.flex.vertical > * { margin: 7px 0; }
+
+/* Grid Styles ****************************************************************************/
+.ngViewport, .ngTopPanel.ng-scope {
+  width: auto !important;
+  overflow-y: visible;
+}
+.ngTopPanel.ng-scope {  /* Hide ng-grid's header */
+  display: none !important;
+}
+.ngFooterPanel {  /* Hide ng-grid's footer */
+  display: none;
+}
+#pbid-AddGrid {
+  border: 2px solid lime;
+}
+#pbid-DropGrid {
+  border: 2px solid red;
+}
+.ngRow:hover {
+    background-color: #f9f7cc !important;
+}
+.ngVerticalBar {
+  width: 0;
+}
+.ngCell {
+  display : table-cell;
+  height: auto !important;
+  width: auto !important;
+  overflow:visible;
+  position: static;
+  padding: 0.50em 0.50em;
+}
+.ngRow {
+  display : table-row;
+  height: auto !important;
+  width: auto !important;
+  position: static;
+}
+.ngRow:nth-child(1) {  /* Bold the first row - header */
+  font-weight: bold;
+}
+.ngCellText {
+  height: auto !important;
+  width: auto !important;
+  white-space: normal;
+  overflow: visible;
+}
+
+/* Table Styles ********************************************************************************/
+td {
+  padding: 3px;
+  vertical-align: top;
+  font-size: 85%;
+}
+
+/* Form Styles ********************************************************************************/
+.pb-form-item-container {
+  padding-top: 1em;
+}
+
+/* Input Styles ********************************************************************************/
+input {
+  -webkit-appearance: none;
+}
+input.pb-item.pb-text,
+input.pb-item.pb-number,
+input.pb-item.pb-datetime,
+input.pb-item.pb-email,
+input.pb-item.pb-tel
+{
+  width: 25em;
+  height: 2.2em !important;
+  line-height: 1px;  /* For IE */
+  border-radius: 4px;
+  border: 1px solid #869FB1;
+  box-shadow: inset 4px 4px 4px #E2EAEF;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  font-size: 0.875em;
+  padding-left: 9px;
+ }
+ input.pb-item:focus {
+        border: 1px solid #206E9F;
+        box-shadow: inset 0px 2px 2px #CBE2E8;
+        color: #4F585F;
+ }
+input.pb-item.hasDatepicker{
+  height:inherit;
+}
+
+/* Label Styles ***********************************************************************************/
+label.pb-label {
+  size: 1em;
+  color: #4F585F;
+  font-weight: 400;
+
+  /* Float Labels Right but left of Input Text Boxes and Center All */
+  float: center;
+  width: 14em;
+  margin-right: 0.5em;
+  text-align: right;
+}
+label.pb-label.pb-boolean{
+  display:inline-block;
+}
+
+/* Add and Drop Section Labels **********************************************************************/
+#pbid-CourseAddLabel-container,
+#pbid-CourseDropLabel-container,
+#pbid-CourseAddSearchLabel-container {
+  font-size: 1.3em;
+  font-weight: bold;
+  padding-bottom: 0.5em;
+}
+
+/* Add Entry Form Fields ****************************************************************************/
+#pbid-AddEntryStuName-container,
+#pbid-AddEntryStuClass-container {
+  padding-top: 0em !Important;
+}
+#pbid-AddEntryStuName-label,
+#pbid-AddEntryStuClass-label {
+  font-weight: bold;
+}
+#pbid-AddEntryStuName,
+#pbid-AddEntryStuClass {
+  border: none;
+  box-shadow: none;
+  width: 22.6em;
+  padding-top: 0.5em !Important;
+  padding: 1em 0.75em;  /* For Firefox */
+}
+#pbid-AddVerifyForm {
+  background-color: #eeeeee;
+  padding: 0em;
+  width: 50em;
+}
+#pbid-AddVerifyCIDTitle-container,
+#pbid-AddVerifyInstructor-container,
+#pbid-AddVerifyBlockUnit-container,
+#pbid-AddMessage-container,
+#pbid-DropMessage-container {
+  padding: 0em !Important;
+}
+#pbid-AddVerifyCIDTitle,
+#pbid-AddVerifyInstructor,
+#pbid-AddVerifyBlockUnit {
+  border: none;
+  box-shadow: none;
+  width: 57em;
+  background-color: #eeeeee;
+}
+#pbid-AddMessage,
+#pbid-DropMessage {
+  border: none;
+  box-shadow: none;
+  width: 57em;
+  background-color: #fbcd7c;
+}
+#pbid-AddVerifyCIDTitle-label,
+#pbid-AddVerifyInstructor-label,
+#pbid-AddVerifyBlockUnit-label,
+#pbid-AddMessage-label,
+#pbid-DropMessage-label {
+  width: 5.4em;
+}
+#pbid-AddTermEntry-container {
+  padding-bottom: 1em !Important;
+}
+#pbid-AddTermEntry,
+#pbid-AddCRNEntry,
+#pbid-AddTrackEntry,
+#pbid-AddConsentEntry {
+  width: 12em;
+}
+#pbid-AddTermEntry-label,
+#pbid-AddCRNEntry-label,
+#pbid-AddTrackEntry-label,
+#pbid-AddConsentEntry-label {
+  font-weight: bold;
+  width: 11em;
+  display: block;
+  text-align: left;
+  padding-left: 0.2em;
+}
+#pbid-AddEntryStuName-label {
+  font-weight: bold;
+  width: 2.6em;
+}
+#pbid-AddEntryStuClass-label {
+  margin: 0 auto;
+  display: block;
+}
+
+/* Objects by ID *******************************************************************************/
+#pbid-SearchTermSelect,
+#pbid-SearchSubjectSelect,
+#pbid-SearchBlockSelect,
+#pbid-SearchInstructorSelect,
+#pbid-SearchDegReqSelect,
+#pbid-SearchVacancySelect,
+#pbid-SearchCampusSelect {
+  width: 25em;
+}
+#pbid-StuLookup {
+  width: 18em !important;
+}
+#pbid-StuDropForm {
+  text-align: left;
+}
+#pbid-AddCourseEntry-container,
+#pbid-AddResetEntry-container,
+#pbid-DropReset-container {
+  padding-left: 1em;
+}
+*[id^='pbid-Track'] {  /* DropGrid - Track Objects */
+  width: 10em !important;
+  height: 22px !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+}
+#pbid-DropGriddata-header-DropCourse,
+#pbid-DropGriddata-header-Track
+ {
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+}
+*[id^='pbid-DropCourse'] {  /* DropGrid - DropCourse Objects */
+  padding-left: 0.7em;
+}
+
+/* Select Style *********************************************************************************/
+select.pb-item.pb-select {
+  -webkit-appearance:none;
+  -webkit-appearance: menulist-button;
+  color:#4F585F;
+  border: 2px solid #869FB1;
+  box-shadow: inset 0px -4px #DEE5E7;
+  width: 22em;
+  height:30px;
+  line-height:30px;
+  border: 1px solid #CCC
+  padding: 1em 0.75em;
+  font-size: 0.875em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius:4px;
+}
+select.pb-select:focus {
+  background-color: #FFFFFF;
+  border: 2px solid #206E9F; 
+}
+
+/* Textarea Style ******************************************************************************/
+textarea.pb-textArea {
+    font-size: 0.875em;
+    width:18.75em;
+    height: 8.125em;
+    border-radius: 0.25em;
+    border: 2px solid #869FB1;
+    box-shadow: inset 4px 4px 4px #E2EAEF;
+    padding: 0.75em;
+    background-color: #FFFFFF;
+    resize: none;
+    line-height: 172%;
+}
+textarea:focus {
+    border: 2px solid #206E9F;
+    box-shadow: inset 0px 2px 2px #CBE2E8;
+    color: #4F585F;
+}
+
+/* Radio Button Style ****************************************************************************/
+/*input[type=radio]:not(old) {
+  margin  : 12;
+  padding : 0;
+  opacity : 0;
+}
+input[type="radio"] + span {
+  background-repeat: no-repeat;
+  background-position: left;
+  background-size: 1em;
+  line-height:172%;  
+  cursor: pointer;
+  padding-left: 25px;
+  background-image: url(plugins/banner-sspb-0.1/BannerXE/lib/xe-components/css/images/radiobutton/radio-button-normal.svg);
+}
+input[type="radio"]:checked + span {
+  color: #1C8445;
+  background-image: url(plugins/banner-sspb-0.1/BannerXE/lib/xe-components/css/images/radiobutton/radio-button-selected.svg)  
+}*/
+
+/* Checkbox Style *******************************************************************************/
+input[type="checkbox"] {
+  -webkit-appearance: checkbox !important;
+  -moz-appearance: checkbox !important;
+  -ms-appearance: checkbox !important;
+  -o-appearance: checkbox !important;
+  appearance: checkbox !important;
+  padding 3px !important;
+}
+
+/*.pb-boolean input[type="checkbox"] {
+    display:none;
+}
+.pb-boolean .pb-item.pb-boolean+label {
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 1.25em;
+  line-height: 172%;
+  cursor: pointer;
+  padding-left: 30px;
+  background-image: url(plugins/banner-sspb-0.1/BannerXE/lib/xe-components/css/images/checkbox/check-box-normal.svg);
+}
+.pb-boolean .pb-item.pb-boolean:checked+label {
+  background-image: url(plugins/banner-sspb-0.1/BannerXE/lib/xe-components/css/images/checkbox/check-box-selected.svg);
+}*/
+
+/* Form Submit Style *****************************************************************************/
+.pb-form-submit {
+  padding-top: 1em;
+}
+.pb-form-submit-button {  /* Primary Button */
+    font-size: 0.875em;
+    background-color: #206E9F;
+    border: 1px solid #206E9F;
+    box-shadow:inset -0px -4px 0px #0C5482;
+    color: #FFFFFF;
+    border-radius: 4px;
+    padding: 0.875em 5.75em;
+}
