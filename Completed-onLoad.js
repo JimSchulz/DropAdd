@@ -1,4 +1,5 @@
 // Completed - onLoad
+
 // Called from AddCourseEntry - addCheck Post
 
 // Assign Completed value.  This shows us when a course add transaction is completed.
