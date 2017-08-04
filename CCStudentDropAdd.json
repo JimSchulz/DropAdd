@@ -1,0 +1,1275 @@
+{
+      "type": "page",
+      "name": "CCStudentDropAdd",
+      "title": "Drop/Add",
+      "label": "Drop/Add and Grading Track Changes",
+      "components": [
+            {
+                  "name": "getSchedTerms",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenSchedTerms"
+            },
+            {
+                  "name": "getAddGrid",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.StuAddGrid"
+            },
+            {
+                  "name": "studentLookup",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenStuLookup"
+            },
+            {
+                  "name": "getStudent",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenStuIDName"
+            },
+            {
+                  "name": "getDropGrid",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.StuDropGrid"
+            },
+            {
+                  "name": "getBlocks",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenBlocks"
+            },
+            {
+                  "name": "getSubjects",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenSubject"
+            },
+            {
+                  "name": "getInstructors",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenInstructor"
+            },
+            {
+                  "name": "getDegreeRequirements",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenDegReq"
+            },
+            {
+                  "name": "getCampuses",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenCampus"
+            },
+            {
+                  "name": "getUser",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenUser"
+            },
+            {
+                  "name": "getGradingTrack",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenGradingTrack"
+            },
+            {
+                  "name": "getCourseConsent",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.StuCourseConsent"
+            },
+            {
+                  "name": "getVerifyCIDTitle",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.StuVerifyCIDTitle"
+            },
+            {
+                  "name": "getVerifyInstructor",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.StuVerifyInstructor"
+            },
+            {
+                  "name": "getVerifyBlockUnit",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.StuVerifyBlockUnit"
+            },
+            {
+                  "name": "studentCheck",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddProcStudentCheck"
+            },
+            {
+                  "name": "dropCheck",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddProcDropCheck"
+            },
+            {
+                  "name": "addCheck",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddProcAddCheck"
+            },
+            {
+                  "name": "getAddMessage",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddAddMessage"
+            },
+            {
+                  "name": "getDropMessage",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddDropMessage"
+            },
+            {
+                  "name": "getAddButtonLabel",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddAddButtonLabel"
+            },
+            {
+                  "name": "getConsentRequired",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddConsentRequired"
+            },
+            {
+                  "name": "getProcessing",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddProcessing"
+            },
+            {
+                  "name": "deleteSZRDRAD",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddDelete"
+            },
+            {
+                  "name": "getCompleted",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.DropAddCompleted"
+            },
+            {
+                  "name": "getSummerOffCampus",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenSummerOffCampus"
+            },
+            {
+                  "name": "getSummerOnCampus",
+                  "type": "resource",
+                  "staticData": [],
+                  "resource": "virtualDomains.GenSummerOnCampus"
+            },
+            {
+                  "name": "getSummerOnCampDrop",
+                  "type": "resource",
+                  "staticData": []
+            },
+            {
+                  "name": "BlockHidden",
+                  "type": "block",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "UserID",
+                              "type": "text",
+                              "model": "getUser.USER_ID",
+                              "parameters": {},
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": true,
+                              "onLoad": "// UserID - onLoad\n\n// Browser Page Closing, Clean Up\nwindow.onbeforeunload = function (e) {\n  // Delete the Processing PIDM's SZRDRAD records\n  $deleteSZRDRAD.$post({\n    stu_pidm: document.getElementById('pbid-PassPIDM').value\n  },\n  null,\n  function(response) {\n    // Success!   \n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    } \n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"UserID - Delete SZRDRAD Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n  return;\n};\n\n// Initially, hide the DropAddInstructions and show the BlockDropAddInstructions\ndocument.getElementById(\"pbid-DropAddInstructions\").style.display = \"none\";\n$BlockDropAddInstructions.$visible = true;\n\n// Initially, hide the AddConsentEntry object\ndocument.getElementById(\"pbid-AddConsentEntry-container\").style.display = \"none\";\n\n// Initially, hide the AddVerifyForm\n$AddVerifyForm.$visible = false;\n\nvar userType = '';\nvar auth = '';\n\n// Determine what kind of user is signing on (Web Tailor)\nfor (i=0; i<$$user.authorities.length; i++) {\n  auth = $$user.authorities[i].objectName;\n  //alert(auth,{flash:true});  // Helpful Debug - Shows user's WebTailor Roles\n  if (auth.indexOf('WTAILORADMIN') > -1) {  // was GPBADMN\n    userType = \"Dev\";\n  }\n  if (auth.indexOf('REGISTRAR') > -1) {\n    userType = \"Reg\";\n    break;  // Give Registrars higher prority\n  }\n  if (auth.indexOf('STUDENT') > -1) {\n    userType = \"Stu\";\n  }\n}\n\nif (userType == 'Reg' || userType == 'Dev') {\n\n  // Show the student lookup block\n  $BlockStuLookup.$visible = true;\n  $BlockNull02.$visible = true;\n  document.getElementById(\"pbid-UserSource\").value = 'R';  // Registrars or Dev User\n}\nelse if (userType == 'Stu') {\n\n  // Hide the student lookup block\n  $BlockStuLookup.$visible = false;\n  $BlockNull02.$visible = false;\n\n  // Prep data\n  document.getElementById(\"pbid-UserSource\").value = 'S';  // Student User\n  var userSource = 'S';\n  document.getElementById('pbid-UserButton').click();\n\n  // The FirstFunction gets the user's pidm\n  function firstFunction() {\n    var deferred = $.Deferred();\n    var nextStep = function() {\n      if ($UserPIDM == null) {\n        $UserPIDM.$load();\n        setTimeout(nextStep, 100); \n      }\n      else {\n        $PassPIDM = document.getElementById('pbid-UserPIDM').value;\n        deferred.resolve(i);\n      }\n    }\n    nextStep();\n    return deferred.promise();\n  }\n\n  // The SecondFunction calls the FirstFunction\n  // We do this to make JavaScript wait for completion of the $UserPIDM.$load DB call\n  function secondFunction() {\n    var promise = firstFunction();\n    promise.then(function(result) { \n\n      var passPIDM = document.getElementById('pbid-UserPIDM').value;\n\n      // Procedure call - Student Check - This loads the SZRDRAD table\n      $studentCheck.$post({  // ---------- studentCheck Post\n        stu_pidm: passPIDM,\n        user_source: userSource\n      },\n      null,\n      function(response) {  // ---------- studentCheck Success\n        // Success!\n\n        // Procedure call - Drop Check - This checks course drops\n        $dropCheck.$post({  // ---------- dropCheck Post\n          stu_pidm: passPIDM,\n          user_source: userSource,\n          drops_in: null,\n          changes_in: null,\n          passcode_in: null\n        },\n        null,\n        function(response) {  // ---------- dropCheck Success\n          // Success!\n\n          // Show the BlockCourseAddEntry and BlockCourseDrop objects\n          $BlockCourseAddEntry.$visible = true;\n          $BlockNull03.$visible = true;\n          $BlockCourseDrop.$visible = true;\n          document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n\n          // Load Student Information\n          $AddTermEntry.$load();\n          $AddTrackEntry.$load();\n          $StuNameID.$load();\n          $AddEntryStuName.$load();\n          $AddEntryStuClass.$load();\n          $AddMessage.$load({clearCache:true});\n          $DropMessage.$load({clearCache:true});\n          $AddButtonText.$load({clearCache:true});\n          $Processing.$load({clearCache:true});\n          $DropGrid.$load({clearCache:true});\n        },\n        function(response) {  // ---------- dropCheck Error\n          var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n          if (response.data.errors.errorMessage) {\n            errorMsg = response.data.errors.errorMessage;\n          }\n          else if (response.data.errors[0].errorMessage) {\n            errorMsg = response.data.errors[0].errorMessage;\n          }\n          else {\n            errorMsg = errorMessage?errorMessage:response.data;\n          }\n          if (errorMsg) {\n            alert(\"UserID dropCheck Error: \" + errorMsg,{type:\"error\"});  // Error\n            return;\n          }\n        });  // ---------- dropCheck Close\n      },\n      function(response) {  // ---------- studentCheck Error\n        var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n        if (response.data.errors.errorMessage) {\n          errorMsg = response.data.errors.errorMessage;\n        }\n        else if (response.data.errors[0].errorMessage) {\n          errorMsg = response.data.errors[0].errorMessage;\n        }\n        else {\n          errorMsg = errorMessage?errorMessage:response.data;\n        }\n        if (errorMsg) {\n          alert(\"UserID studentCheck Error: \" + errorMsg,{type:\"error\"});  // Error\n          return;\n        }\n      });  // ---------- studentCheck Close\n\n    });\n  }\n\n  secondFunction();\n}\nelse {\n  document.getElementById(\"pbid-UserSource\").value = null;  // Not Allowed\n\n  // Hide the student lookup block\n  $BlockStuLookup.$visible = false;\n  $BlockNull02.$visible = false;\n\n  alert(\"You're not authorized to use the Drop/Add application.\",{type:\"error\"});\n}"
+                        },
+                        {
+                              "name": "UserPIDM",
+                              "type": "text",
+                              "model": "getUser.USER_PIDM",
+                              "parameters": {},
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": true
+                        },
+                        {
+                              "name": "PassPIDM",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": true,
+                              "model": ""
+                        },
+                        {
+                              "name": "UserSource",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": true,
+                              "onLoad": ""
+                        },
+                        {
+                              "name": "AddButtonText",
+                              "type": "text",
+                              "model": "getAddButtonLabel.ADD_BUTTON_LABEL",
+                              "parameters": {
+                                    "stu_pidm": "$PassPIDM"
+                              },
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": false,
+                              "onUpdate": "",
+                              "onLoad": "// AddButtonText - onLoad\n\n// Assign button label for the AddCourseEntry button\n\nvar showHideButton;\n\nfunction waitForIt() {\n  // We pause a moment to allow DB retrieval time for the AddButtonText value\n  showHideButton = setTimeout(showHide, 100);\n}\n\nfunction showHide() {\n  if (document.getElementById(\"pbid-AddButtonText\").value == '' || document.getElementById(\"pbid-AddButtonText\").value == null) {\n    document.getElementById(\"pbid-AddCourseEntry\").style.display = 'none';\n    document.getElementById(\"pbid-AddCourseEntry\").innerHTML = ''\n  }\n  else {\n    document.getElementById(\"pbid-AddCourseEntry\").style.display = 'block';\n    document.getElementById(\"pbid-AddCourseEntry\").innerHTML = document.getElementById(\"pbid-AddButtonText\").value;\n  }\n}\n\nwaitForIt();"
+                        },
+                        {
+                              "name": "UserButton",
+                              "type": "button",
+                              "label": "User Button",
+                              "onClick": "return;"
+                        },
+                        {
+                              "name": "AddConsentRequired",
+                              "type": "text",
+                              "model": "getConsentRequired.CONSENT_REQUIRED",
+                              "parameters": {
+                                    "stu_pidm": "$PassPIDM"
+                              },
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": false,
+                              "onLoad": "// AddConsentRequired - onLoad\n\nif ($AddConsentRequired != '' && $AddConsentRequired != null ) {\n  // Course requires consent, show the AddConsentEntry object\n  document.getElementById(\"pbid-AddConsentEntry-container\").style.display = \"block\";\n}\nelse {\n  document.getElementById(\"pbid-AddConsentEntry-container\").style.display = \"none\";\n}"
+                        },
+                        {
+                              "name": "Processing",
+                              "type": "text",
+                              "model": "getProcessing.PROCESSING",
+                              "parameters": {
+                                    "stu_pidm": "$PassPIDM"
+                              },
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": false,
+                              "onLoad": ""
+                        },
+                        {
+                              "name": "Completed",
+                              "type": "text",
+                              "model": "getCompleted.COMPLETED",
+                              "parameters": {
+                                    "stu_pidm": "$PassPIDM"
+                              },
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": false,
+                              "onUpdate": "",
+                              "onLoad": "// Completed - onLoad\n\n// Called from AddCourseEntry - addCheck Post\n\n// Assign Completed value.  This shows us when a course add transaction is completed.\n\nvar paws;\n\nfunction waitForIt() {\n  // We pause a moment to allow DB retrieval time for the Completed value\n  paws = setTimeout(showHide, 200);\n}\n\nfunction showHide() {\n  if ($BlockCourseAddEntry.$visible == true || $ProcessingData.$visible == true) {\n    if (document.getElementById(\"pbid-Completed\").value == 'Y') {\n\n      // Course Add Completed!\n\n      // Reset and Hide Add Verify fields\n      document.getElementById(\"pbid-AddVerifyCIDTitle\").value = '';\n      document.getElementById(\"pbid-AddVerifyInstructor\").value = '';\n      document.getElementById(\"pbid-AddVerifyBlockUnit\").value = '';\n      $AddVerifyForm.$visible = false;\n\n      // Reset the Term, CRN, Letter Grade, and Consent fields\n      document.getElementById(\"pbid-AddTermEntry\").value = '';\n      document.getElementById(\"pbid-AddCRNEntry\").value = '';\n      document.getElementById(\"pbid-AddTrackEntry\").value = '';\n      document.getElementById(\"pbid-AddConsentEntry\").value = '';\n\n      // Reset and Hide the Message area\n      document.getElementById(\"pbid-AddMessage\").value = '';\n      $AddEntryMessageForm.$visible = false;\n\n      // Make AddTermEntry and AddCRNEntry fields editable\n      document.getElementById(\"pbid-AddTermEntry\").disabled = false;\n      document.getElementById('pbid-AddCRNEntry').readOnly = false;\n  \n      // Refresh the Drop Add Data\n      document.getElementById('pbid-RefreshDropAddData').click();\n      document.getElementById('pbid-RefreshDropAddData').click();\n\n      // Show the Add and Drop sections and hide the ProcessingData section\n      $BlockCourseAddEntry.$visible = true;\n      $BlockNull03.$visible = true;\n      $BlockCourseDrop.$visible = true;\n      $ProcessingData.$visible = false;\n\n      alert(\"Course has been added to your schedule.\",{flash:true});\n    }\n    else {\n   \n      // Course Validation Occurring\n\n      // Load Add Messages\n      $AddMessage.$load({clearCache:true});\n\n      // Load Add Button Text\n      $AddButtonText.$load({clearCache:true});\n\n      // Load Consent Required\n      $AddConsentRequired.$load({clearCache:true});\n\n      // Reload Processing\n      $Processing.$load({clearCache:true});\n\n      // Show the Add and Drop sections and hide the ProcessingData section\n      $BlockCourseAddEntry.$visible = true;\n      $BlockNull03.$visible = true;\n      $BlockCourseDrop.$visible = true;\n      $ProcessingData.$visible = false;\n    }\n  }\n}\n\nwaitForIt();"
+                        },
+                        {
+                              "name": "RefreshDropAddData",
+                              "type": "button",
+                              "label": "Refresh Drop Add Data",
+                              "onClick": "// RefreshDropAddData - onClick\n\n// This is called from Completed-onLoad and DropApplyChanges-onClick\n// This resets the drop/add form by reinitializing the SZRDRAD table.\n\n// Procedure call - Student Check - This loads the SZRDRAD table\n$studentCheck.$post({  // ---------- studentCheck Post\n  stu_pidm: document.getElementById('pbid-PassPIDM').value,\n  user_source: document.getElementById('pbid-UserSource').value\n},\nnull,\nfunction(response) {  // ---------- studentCheck Success\n  // Success!\n\n  // Procedure call - Drop Check - This checks course drops\n  $dropCheck.$post({  // ---------- dropCheck Post\n    stu_pidm: document.getElementById('pbid-PassPIDM').value,\n    user_source: document.getElementById('pbid-UserSource').value,\n    drops_in: null,\n    changes_in: null,\n    passcode_in: null\n  },\n  null,\n  function(response) {  // ---------- dropCheck Success\n    // Success!\n\n    // Reload the DropGrid\n    document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n    document.getElementById('pbid-UserButton').click();\n    $DropGrid.$load({clearCache:true});\n    $AddButtonText.$load({clearCache:true});\n  },\n  function(response) {  // ---------- dropCheck Error\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    }\n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"AddCompletedButton - dropCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });  // ---------- dropCheck Close\n\n},\nfunction(response) {  // ---------- studentCheck Error\n  var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n  if (response.data.errors.errorMessage) {\n    errorMsg = response.data.errors.errorMessage;\n  }\n  else if (response.data.errors[0].errorMessage) {\n    errorMsg = response.data.errors[0].errorMessage;\n  } \n  else {\n    errorMsg = errorMessage?errorMessage:response.data;\n  }\n  if (errorMsg) {\n    alert(\"AddCompletedButton - studentCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n    return;\n  }\n});  // ---------- studentCheck Close"
+                        },
+                        {
+                              "name": "SummerOffCampus",
+                              "type": "text",
+                              "parameters": {
+                                    "term_code": "$AddTermEntry",
+                                    "crn": "$AddCRNEntry"
+                              },
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": false,
+                              "model": "getSummerOffCampus.OFF_CAMPUS",
+                              "onLoad": ""
+                        },
+                        {
+                              "name": "SummerOnCampus",
+                              "type": "text",
+                              "model": "getSummerOnCampus.ON_CAMPUS",
+                              "parameters": {
+                                    "term_code": "$AddTermEntry",
+                                    "crn": "$AddCRNEntry"
+                              },
+                              "validation": {},
+                              "readonly": false,
+                              "required": false,
+                              "loadInitially": true
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockDropAddInstructions",
+                  "type": "block",
+                  "label": "",
+                  "style": "blocks",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "DropAddButton",
+                              "type": "button",
+                              "label": "Drop/Add Instructions",
+                              "onClick": "// DropAddButton - onClick\n\n// Show/Hide the drop/add instructions\n\nif (document.getElementById(\"pbid-DropAddInstructions\").style.display == 'none') {\n  document.getElementById(\"pbid-DropAddInstructions\").style.display = \"block\";\n}\nelse {\n  document.getElementById(\"pbid-DropAddInstructions\").style.display = \"none\";\n}"
+                        },
+                        {
+                              "name": "DropAddInstructions",
+                              "type": "literal",
+                              "value": "<br />\n<p><b>Welcome to the Drop/Add application!</b></p>\n<p>Here's what you can do with this application:<br /> &bull; Search the Class Schedule for courses.<br /> &bull; Add or Drop a course.<br /> &bull; Change the grade track for a course.</p>\n<p><b>Dropping a Course</b></p>\n<p>&bull; Sometimes, all you want to do is drop a course and that&rsquo;s all. Piece of cake! Go down to the &ldquo;Course Drops and Grading Track Changes&rdquo; section and use the drop-down list for the course you wish to drop. Choose &ldquo;drop&rdquo; and then click &ldquo;Apply Drops and Grading Track Changes&rdquo; at the bottom.<br /> &bull; You will be asked to confirm your drop. Breathe and Focus deeply now, for if you drop a course, and if it&rsquo;s full, then those in the waiting-list will pounce upon that open seat like the Maine&rsquo;s morning lobster freight train bound for Boston!<br /> &bull; If you are confident in your drop, then click OK. This will drop your class and refresh your course schedule.<br /> &bull; If you have reservations or doubts, then click Cancel and all will be restored to its former glory.</p>\n<p><b>Changing a Grading Track</b></p>\n<p>&bull; The Letter Grades track applies to specific grades (like A, B-, C+, etc.) which impact your GPA.<br /> &bull; Optional Grades track applies to more general grades (like S/CR/NC) which impact your GPA but in a different way.<br /> &bull; The Audit track does not give you a grade and does not impact your GPA.<br /> &bull; You can modify the grading track for a class by clicking on the corresponding drop-down list and choosing a different grading track, then clicking &ldquo;Apply Drops and Grading Track Changes&rdquo; at the bottom of this section.<br /> &bull; This will then ask you to confirm your change.<br /> &bull; Press OK to process your change, or Cancel to go back from whence you came. This section will then refresh and you&rsquo;ll see the change displayed.</p>\n<p><b>Adding a Course</b></p>\n<p>&bull; Adding a course to your schedule is easy as pie!<br /> &bull; Go to the &ldquo;Course Add&rdquo; section. You should see your name and student ID number.<br /> &bull; If you happen to know the Term, CRN, and Grading Track of the class you wish to add, then just enter them here and click the Continue button.<br /> &bull; Alas, the above is not usually the norm. More often you will need to look-up the CRN (Course Reference Number) for the class you wish to add.<br /> &bull; To look-up a class, press the &ldquo;Search Class Schedule&rdquo; button and then scroll down to the bottom of the page.<br /> &bull; Here you will find filters to restrict your class search. Only the Term filter is required, but please note that results are limited to the first 200 classes found, so be as specific as possible.<br /> &bull; Once you have chosen your filter, then press the &ldquo;Class Search&rdquo; button to load the results of the search.<br /> &bull; Find the class you wish to add and then click on the corresponding checkbox on the left. This will then close this section and the Class Schedule Search section and the chosen Term and CRN will appear in the Course Add section above.<br /> &bull; From this point you can select your desired Grading Track and then press the &ldquo;Continue&rdquo; button.<br /> &bull; The course information for the Term and CRN entered is now displayed. This is done so that you can verify the chosen class before actually adding the class. If you&rsquo;re lucky, the &ldquo;Continue&rdquo; button now changes to an &ldquo;Add Course&rdquo; button. Verify the class is the one you want and press the &ldquo;Add Course&rdquo; button, and then, if all is in alignment, the class will be added to your schedule.<br /> &bull; Note that when starting the process of adding a class, the Term, CRN, and Grading Track fields become locked for the current transaction. To unlock them and start over, press the &ldquo;Reset&rdquo; button.</p>\n<p><b>What could possibly go wrong?</b></p>\n<p>&bull; As with many things in life, the Drop/Add process has many rules. Many many rules. At any given point in adding or dropping a class, or changing a grading track, you may bump up against one of these rules (aka: edits).<br /> &bull; Edits appear in the form of an orange yellowish box within the corresponding section. Please read the edit. Be one with the message. Allow the thought to be processed.<br /> &bull; Sometimes the edit is easy to resolved. Perhaps you forgot to enter something, or you&rsquo;re accidentally trying to add a class during a block that&rsquo;s in the past.<br /> &bull; Sometimes the edit is beyond your control. In this case the Registrars Office can help. Be gentle with them because they&rsquo;re people too.</p>\n<p><b>Consent</b></p>\n<p>&bull; Some classes require a consent before they can be dropped or added. Even a change to a Grading Track may require a consent.<br /> &bull; If a consent is required, you&rsquo;ll see an additional input field appear in the appropriate section. Enter in the consent code and then proceed as normal.<br /> &bull; &ldquo;But wait Mister Drop Add man! Where do I get my consent code?&rdquo; Good question grasshopper. Sometimes class consent comes from your instructor. Sometimes it comes from the subject&rsquo;s department head. Other times your only recourse is to visit the Registrars Office. Be kind and the world shall unfold before you.</p>",
+                              "style": ""
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockNull01",
+                  "type": "block",
+                  "label": "",
+                  "style": "blockSpace",
+                  "showInitially": true,
+                  "components": [
+                        {
+                              "name": "BlockSpace01",
+                              "type": "literal",
+                              "value": "&nbsp;"
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockStuLookup",
+                  "type": "block",
+                  "style": "blocks",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "LookupInstructions",
+                              "type": "literal",
+                              "label": "",
+                              "style": "",
+                              "value": "<center>Enter a Student's ID or First Name or Last Name</center>"
+                        },
+                        {
+                              "name": "StuLookupForm",
+                              "type": "form",
+                              "style": "blockLookup",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "StuLookup",
+                                          "type": "text",
+                                          "label": "",
+                                          "style": "flex",
+                                          "model": "",
+                                          "parameters": {},
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": true,
+                                          "onLoad": "",
+                                          "placeholder": ""
+                                    },
+                                    {
+                                          "name": "StuSearch",
+                                          "type": "button",
+                                          "label": "Search",
+                                          "style": "flex",
+                                          "onClick": "// StuSearch - onClick\n\nvar stuLkup = document.StuLookupForm.StuLookup.value;\n\nif (stuLkup.replace(/^\\s+/g, '').length == 0) {\n  document.StuLookupForm.StuLookup.focus();\n  alert(\"Student Lookup is empty.\", {flash: true,type:\"error\"});\n  return;\n}\n\ndocument.getElementById('pbid-StuSelect').options[0].text = 'Loading...';\n\n$StuSelect.$populateSource();"
+                                    },
+                                    {
+                                          "name": "StuSelect",
+                                          "type": "select",
+                                          "sourceModel": "studentLookup",
+                                          "labelKey": "STU_FULL_NAME",
+                                          "valueKey": "STU_PIDM",
+                                          "style": "flex",
+                                          "sourceParameters": {
+                                                "stu_lookup": "$StuLookup"
+                                          },
+                                          "model": "StuSelect",
+                                          "required": false,
+                                          "placeholder": "Waiting for a Lookup Value...",
+                                          "loadInitially": false,
+                                          "onLoad": "// StuSelect - onLoad\n\ndocument.getElementById('pbid-StuSearch').click();\n\nif (document.getElementById('pbid-StuSelect').options.length > 1) {\n  document.getElementById('pbid-StuSelect').options[0].text = 'Select a Student';\n}\nelse {\n  document.getElementById('pbid-StuSelect').options[0].text = 'No Students Found';\n}",
+                                          "onError": "",
+                                          "value": "",
+                                          "onUpdate": "// StuSelect - onUpdate\n\n// Selected student is changing\n\nif (document.getElementById('pbid-PassPIDM').value != null) {\n  // Delete the prior PIDM's SZRDRAD records\n  $deleteSZRDRAD.$post({\n    stu_pidm: document.getElementById('pbid-PassPIDM').value\n  },\n  null,\n  function(response) {\n    // Success!   \n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    } \n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"StuSelect - Delete SZRDRAD Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n}\n\n// Assign chosen student's values\nvar stuSelect = $StuSelect.$selected?$StuSelect.$selected.STU_PIDM:null;\n$PassPIDM = $StuSelect.$selected?$StuSelect.$selected.STU_PIDM:null;\nvar userSource = document.getElementById('pbid-UserSource').value;\n\nif (stuSelect != null) {\n\n  // Procedure call - Student Check - This loads the SZRDRAD table\n  $studentCheck.$post({\n    stu_pidm: stuSelect,\n    user_source: userSource\n  },\n  null,\n  function(response) {\n    // Success!\n\n    // Procedure call - Drop Check - This checks course drops\n    $dropCheck.$post({\n      stu_pidm: stuSelect,\n      user_source: userSource,\n      drops_in: null,\n      changes_in: null,\n      passcode_in: null\n    },\n    null,\n    function(response) {\n      // Success!\n\n      document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n      document.getElementById('pbid-UserButton').click();\n\n      // Show the BlockCourseAddEntry and BlockCourseDrop objects\n      $BlockCourseAddEntry.$visible = true;\n      $BlockNull03.$visible = true;\n      $BlockCourseDrop.$visible = true;\n\n      // Load Student Information\n      $StuNameID.$load();\n      $AddTermEntry.$load();\n      $AddTrackEntry.$load();\n      $AddEntryStuName.$load();\n      $AddEntryStuClass.$load();\n      $AddMessage.$load({clearCache:true});\n      $DropMessage.$load({clearCache:true});\n      $AddButtonText.$load({clearCache:true});\n      $Processing.$load({clearCache:true});\n      $DropGrid.$load({clearCache:true});\n    },\n    function(response) {\n      var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n      if (response.data.errors.errorMessage) {\n        errorMsg = response.data.errors.errorMessage;\n      }\n      else if (response.data.errors[0].errorMessage) {\n        errorMsg = response.data.errors[0].errorMessage;\n      }\n      else {\n        errorMsg = errorMessage?errorMessage:response.data;\n      }\n      if (errorMsg) {\n        alert(\"dropCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n        return;\n      }\n    });\n\n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    } \n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"studentCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n\n}\nelse {\n  // Hide the BlockCourseAddEntry and BlockCourseDrop objects\n  $BlockCourseAddEntry.$visible = false;\n  $BlockNull03.$visible = false;\n  $BlockCourseDrop.$visible = false;\n\n  // Hide the Class Search and Result objects\n  $BlockClassSearch.$visible = false;\n  $BlockNull05.$visible = false;\n  $BlockCourseAdd.$visible = false;\n}\n\n// Reset and Hide Add Verify fields\n$AddVerifyForm.$visible = false;\ndocument.getElementById(\"pbid-AddVerifyCIDTitle\").value = '';\ndocument.getElementById(\"pbid-AddVerifyInstructor\").value = '';\ndocument.getElementById(\"pbid-AddVerifyBlockUnit\").value = '';\n\n// Make AddTermEntry and AddCRNEntry fields editable during this transaction session.\ndocument.getElementById(\"pbid-AddTermEntry\").disabled=false;\ndocument.getElementById('pbid-AddCRNEntry').readOnly = false;",
+                                          "label": ""
+                                    }
+                              ]
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockNull02",
+                  "type": "block",
+                  "style": "blockSpace",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "BlockSpace02",
+                              "type": "literal",
+                              "value": "&nbsp;"
+                        }
+                  ]
+            },
+            {
+                  "name": "ProcessingData",
+                  "type": "block",
+                  "style": "blocks",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "ProcessingImage",
+                              "type": "literal",
+                              "value": "<img src=\"http://jimvision.com/XE/processing.gif\">"
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockCourseAddEntry",
+                  "type": "block",
+                  "style": "blocks",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "CourseAddLabel",
+                              "type": "literal",
+                              "value": "Course Add"
+                        },
+                        {
+                              "name": "AddEntryDisplayForm",
+                              "type": "form",
+                              "style": "blockAddEntry",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "AddEntryStuName",
+                                          "type": "text",
+                                          "label": "Name:",
+                                          "style": "blockAddEntry",
+                                          "labelStyle": "",
+                                          "loadInitially": true,
+                                          "value": "",
+                                          "model": "getStudent.STU_NAME_ID",
+                                          "parameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "onLoad": "// AddEntryStuName - onLoad\n\n// Make these fields read only\ndocument.getElementById('pbid-AddEntryStuName').readOnly = true;\ndocument.getElementById('pbid-AddEntryStuClass').readOnly = true;\ndocument.getElementById('pbid-AddVerifyCIDTitle').readOnly = true;\ndocument.getElementById('pbid-AddVerifyInstructor').readOnly = true;\ndocument.getElementById('pbid-AddVerifyBlockUnit').readOnly = true;\ndocument.getElementById('pbid-AddMessage').readOnly = true;\ndocument.getElementById('pbid-DropMessage').readOnly = true;",
+                                          "valueStyle": ""
+                                    },
+                                    {
+                                          "name": "AddEntryStuClass",
+                                          "type": "text",
+                                          "label": "Class:",
+                                          "loadInitially": true,
+                                          "value": "",
+                                          "model": "getStudent.STU_CLASS",
+                                          "parameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "onLoad": "",
+                                          "style": "blockAddEntry",
+                                          "labelStyle": ""
+                                    }
+                              ],
+                              "label": "",
+                              "submit": ""
+                        },
+                        {
+                              "name": "AddEntryMessageForm",
+                              "type": "form",
+                              "style": "blocks",
+                              "nextButtonLabel": "Next",
+                              "showInitially": false,
+                              "components": [
+                                    {
+                                          "name": "AddMessage",
+                                          "type": "textArea",
+                                          "parameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "model": "getAddMessage.ADD_MESSAGE",
+                                          "onLoad": "// AddMessage - onLoad\n\n// Show or Hide the Add Message\nif ($AddMessage == '' || $AddMessage == null) {\n  $AddEntryMessageForm.$visible = false;\n}\nelse {\n  $AddEntryMessageForm.$visible = true;\n}",
+                                          "onUpdate": ""
+                                    }
+                              ]
+                        },
+                        {
+                              "name": "AddEntryForm",
+                              "type": "form",
+                              "label": "",
+                              "style": "blockAddEntry",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "AddTermEntry",
+                                          "type": "select",
+                                          "label": "Term",
+                                          "style": "",
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "sourceModel": "getSchedTerms",
+                                          "labelKey": "TERM_LABEL",
+                                          "valueKey": "TERM_VALUE",
+                                          "sourceParameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "placeholder": "&nbsp;",
+                                          "onLoad": "",
+                                          "value": "",
+                                          "onUpdate": ""
+                                    },
+                                    {
+                                          "name": "AddCRNEntry",
+                                          "type": "text",
+                                          "label": "CRN",
+                                          "style": "",
+                                          "parameters": {},
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "labelStyle": "",
+                                          "placeholder": "",
+                                          "onLoad": ""
+                                    },
+                                    {
+                                          "name": "AddTrackEntry",
+                                          "type": "select",
+                                          "label": "Grading Track",
+                                          "style": "",
+                                          "required": false,
+                                          "loadInitially": true,
+                                          "placeholder": "&nbsp;",
+                                          "sourceModel": "getGradingTrack",
+                                          "labelKey": "TRACK_LABEL",
+                                          "valueKey": "TRACK_VALUE",
+                                          "sourceParameters": {},
+                                          "onLoad": "// AddTrackEntry - onLoad\n\n// Remove the \"Audit\" option.  Need to resolved this later.\n// The Audit option causes an error when trying to add a course.\n\nvar hideAudit;\n\nfunction waitForIt() {\n  // We pause a moment to allow DB retrieval time for the AddTrackEntry options\n  hideAudit = setTimeout(showHide, 100);\n}\n\nfunction showHide() {\n  // Remove both he Audit and Drop options\n  document.getElementById('pbid-AddTrackEntry').remove(4);\n  document.getElementById('pbid-AddTrackEntry').remove(3);\n}\n\nwaitForIt();"
+                                    },
+                                    {
+                                          "name": "AddConsentEntry",
+                                          "type": "text",
+                                          "label": "Consent Passcode",
+                                          "style": "",
+                                          "parameters": {},
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "model": "",
+                                          "onLoad": ""
+                                    }
+                              ]
+                        },
+                        {
+                              "name": "AddVerifyForm",
+                              "type": "form",
+                              "nextButtonLabel": "Next",
+                              "showInitially": false,
+                              "components": [
+                                    {
+                                          "name": "AddVerifyCIDTitle",
+                                          "type": "text",
+                                          "label": "",
+                                          "parameters": {
+                                                "add_term_entry": "$AddTermEntry.$selected?$AddTermEntry.$selected.TERM_VALUE:null",
+                                                "add_term_search": "$SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null",
+                                                "add_crn": "$AddCRNEntry"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "onLoad": "// AddVerifyCIDTitle - onLoad\n\n// Show or Hide the Add Verify Form\n\nif ($AddVerifyCIDTitle == '' || $AddVerifyCIDTitle == null) {\n  $AddVerifyForm.$visible = false;\n}\nelse {\n  $AddVerifyForm.$visible = true;\n}",
+                                          "model": "getVerifyCIDTitle.CID_TITLE"
+                                    },
+                                    {
+                                          "name": "AddVerifyInstructor",
+                                          "type": "text",
+                                          "label": "",
+                                          "parameters": {
+                                                "add_term_entry": "$AddTermEntry.$selected?$AddTermEntry.$selected.TERM_VALUE:null",
+                                                "add_term_search": "$SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null",
+                                                "add_crn": "$AddCRNEntry"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "onLoad": "",
+                                          "model": "getVerifyInstructor.INSTRUCTOR"
+                                    },
+                                    {
+                                          "name": "AddVerifyBlockUnit",
+                                          "type": "text",
+                                          "label": "",
+                                          "parameters": {
+                                                "add_term_entry": "$AddTermEntry.$selected?$AddTermEntry.$selected.TERM_VALUE:null",
+                                                "add_term_search": "$SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null",
+                                                "add_crn": "$AddCRNEntry"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "onLoad": "",
+                                          "model": "getVerifyBlockUnit.BLOCK_UNIT"
+                                    }
+                              ],
+                              "label": "",
+                              "style": "blocks"
+                        },
+                        {
+                              "name": "AddEntryButtonsForm",
+                              "type": "form",
+                              "style": "blockAddEntry",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "SearchClassSchedule",
+                                          "type": "button",
+                                          "label": "Search Class Schedule",
+                                          "onClick": "// SearchClassSchedule - onClick\n\n// Show/Hide the Class Schedule search section\n\nif ($BlockClassSearch.$visible == false) {\n  $BlockNull04.$visible = true;\n  $BlockClassSearch.$visible = true;\n  $BlockNull05.$visible = true;\n  $BlockCourseAdd.$visible = true;\n  $SearchTermSelect.$load({clearCache:true});\n  $SearchSubjectSelect.$load({clearCache:true});\n  $SearchBlockSelect.$load({clearCache:true});\n  $SearchInstructorSelect.$load({clearCache:true});\n  $SearchDegReqSelect.$load({clearCache:true});\n  $SearchCampusSelect.$load({clearCache:true});\n  alert(\"Class Schedule form displayed below.\", {flash: true});\n}\nelse {\n  $BlockClassSearch.$visible = false;\n  $BlockNull05.$visible = false;\n  $BlockCourseAdd.$visible = false;\n}"
+                                    },
+                                    {
+                                          "name": "AddCourseEntry",
+                                          "type": "button",
+                                          "label": "Add",
+                                          "onClick": "// AddCourseEntry - onClick\n\ndocument.getElementById('pbid-UserButton').click();\n\n// Retrieve input values from the AddEntryForm\nvar term = document.getElementById('pbid-AddTermEntry').value;\nvar crn = document.getElementById('pbid-AddCRNEntry').value;\nvar track = document.getElementById('pbid-AddTrackEntry').value;\nvar passcode = document.getElementById('pbid-AddConsentEntry').value;\n\n// Remove the value \"string:\" which was prefixed via the Class Schedule Search process.\nvar term = term.substring(term.indexOf(\":\")+1, term.length);\nvar crn = crn.substring(crn.indexOf(\":\")+1,crn.length);\nvar track = track.substring(track.indexOf(\":\")+1, track.length);\nvar passcode = passcode.substring(passcode.indexOf(\":\")+1, passcode.length);\n\n// CRN maximum value edit\nif (crn.length > 5) {\n  alert(\"CRN value is greater than 5 digits.\",{flash: true,type:\"error\"});\n  return;\n}\n\n$SummerOnCampus.$load({clearCache:true});  // Get the Summer course on-campus indicator\n\n$SummerOffCampus.$load({clearCache:true});  // Get the Summer course off-campus indicator\n\nvar paws;\n\nfunction waitForIt() {\n  // We pause a moment to allow DB retrieval time for the OffCampus value\n  paws = setTimeout(showHide, 200);\n}\n\nfunction showHide() {\n\n  if (document.getElementById(\"pbid-SummerOffCampus\").value == 'Y') {\n\n    // Course is Summer Off-Campus\n    \n    // Prompt user to verify Off-Campus Financial Responsibility\n    if (confirm(\"FINANCIAL RESPONSIBILITY:\\n\\nThe cost for each off-campus summer course consists of two charges that will be billed to your account in April:\\n1. Tuition: Students are charged Summer Session tuition for all summer CC units that are not covered by the Wild Card. The Wild Card is automatically applied to the first summer course in which you enroll (with the exception of independent study courses that are not eligible for the Wild Card). Note that the Wild Card covers one unit of tuition and some off-campus summer courses are 1.5 or 2.0 units. The 2017 Summer Session tuition rate is $4,600 per one CC unit of credit.\\n2. Program fee: This fee covers the travel related expense of the course such as housing, excursions, entry fees, local transportation, etc.  Some program fees cover meals or partial meals and some cover airfare. It is your responsibility to understand what is included in the program fee and what is not covered.\") == true) {\n      \n      // Prompt user to verify Financial Penalties for Dropping this Course\n      if (confirm(\"FINANCIAL PENALTIES FOR DROPPING THIS COURSE:\\n\\n1. Students must officially drop this course by turning in a Summer Off-Campus Drop Form to the Registrars Office.  Communicating your intent to your professor is NOT sufficient.\\n2. If you drop the course after February 14, 2017 you will incur the following charges on your student account:\\n a. 61-90 days prior to course start date: 25% of program fee.\\n b. 31-60 days prior to course start date: 50% of program fee.\\n c. 22-30 days prior to course start date: 75% of program fee.\\n d. 0-21 days prior to course start date: 100% of program fee + 30% of tuition charge.\") == true) {\n        processAdd();\n      }\n      else {\n        return;  // User pressed the cancel button for Financial Penalties\n      }\n    }\n    else {\n      return;  // User pressed the cancel button for Financial Responsibility\n    }\n  }\n  else if (document.getElementById(\"pbid-SummerOnCampus\").value == 'Y') {\n  \n    // Course is Summer On-Campus\n\n    // Prompt user to verify On-Campus Financial Responsibility\n    if (confirm(\"FINANCIAL RESPONSIBILITY\\n\\nStudents may drop a summer on-campus course three (3) weeks before the course start date with no tuition penalty. When a student drops after three (3) weeks prior to the start date, or up to the third day of the course, 30% of tuition is charged. When a student drops a course after the third day of the block, 100% of tuition is charged. In the case that the Wild Card is available, one may forfeit the Wild Card in lieu of tuition charges.\") == true) {\n      processAdd();\n    }\n    else {\n      return;  // User press the cancel button for On-Campus Financial Responsibility\n    }\n  }\n  else {  // Course is not Summer On-Campus and is not Summer Off-Campus\n    processAdd();\n  }\n}\n\nwaitForIt();\n\nfunction processAdd() {\n  // Make AddTermEntry and AddCRNEntry fields read-only during this transaction session.\n  document.getElementById(\"pbid-AddTermEntry\").disabled = true;\n  document.getElementById('pbid-AddCRNEntry').readOnly = true;\n\n  // Hide the Add and Drop sections and show the ProcessingData section\n  $BlockCourseAddEntry.$visible = false;\n  $BlockNull03.$visible = false;\n  $BlockCourseDrop.$visible = false;\n  $ProcessingData.$visible = true;\n\n  /* // Debug Code\n  alert(\"passcode=\"+ passcode,{flash:true});\n  alert(\"track=\"+ track,{flash:true});\n  alert(\"crn=\"+ crn,{flash:true});\n  alert(\"term=\"+ term,{flash:true});\n  alert(\"user_source=\"+ document.getElementById('pbid-UserSource').value,{flash:true});\n  alert(\"PassPIDM=\"+ $PassPIDM,{flash:true});\n  */\n\n  // Procedure call - Add Check - This checks the course being added\n  $addCheck.$post({  // ---------- addCheck Post\n    stu_pidm: $PassPIDM,\n    user_source: document.getElementById('pbid-UserSource').value,\n    term_in: term,\n    crn_in: crn,\n    track_in: track,\n    passcode_in: passcode\n  },\n  null,\n  function(response) {  // ---------- addCheck Success\n    // Success!\n\n    // Load verify fields\n    $AddVerifyCIDTitle.$load({clearCache:true});\n    $AddVerifyInstructor.$load({clearCache:true});\n    $AddVerifyBlockUnit.$load({clearCache:true});\n\n    // Load Completed Status\n    // This is what tells us when a Course Add transaction is completed.\n    $Completed.$load({clearCache:true});\n  },\n  function(response) {  // ---------- addCheck Error\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    } \n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      // Show the Add and Drop sections and hide the ProcessingData section\n      $BlockCourseAddEntry.$visible = true;\n      $BlockNull03.$visible = true;\n      $BlockCourseDrop.$visible = true;\n      $ProcessingData.$visible = false;\n\n      alert(\"addCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n\n  });  // ---------- addCheck Close\n}"
+                                    },
+                                    {
+                                          "name": "AddResetEntry",
+                                          "type": "button",
+                                          "label": "Reset",
+                                          "onClick": "// AddResetEntry - onClick\n\ndocument.getElementById(\"pbid-AddEntryForm\").reset();\ndocument.getElementById(\"pbid-AddVerifyForm\").reset();\ndocument.getElementById(\"pbid-ClassSearch\").reset();\ndocument.getElementById(\"pbid-CourseAddForm\").reset();\ndocument.getElementById(\"pbid-AddConsentEntry-container\").style.display = \"none\";\ndocument.getElementById('pbid-AddTermEntry').disabled = false;\ndocument.getElementById('pbid-AddCRNEntry').readOnly = false;\ndocument.getElementById(\"pbid-AddVerifyCIDTitle\").value = '';\ndocument.getElementById(\"pbid-AddVerifyInstructor\").value = '';\ndocument.getElementById(\"pbid-AddVerifyBlockUnit\").value = '';\ndocument.getElementById(\"pbid-AddMessage\").value = '';\n$AddEntryMessageForm.$visible = false;\n$AddVerifyForm.$visible = false;\n$BlockClassSearch.$visible = false;\n$BlockNull05.$visible = false;\n$BlockCourseAdd.$visible = false;\n\n// Procedure call - Student Check - This loads the SZRDRAD table\n$studentCheck.$post({\n  stu_pidm: document.getElementById('pbid-PassPIDM').value,\n  user_source: document.getElementById('pbid-UserSource').value\n},\nnull,\nfunction(response) {\n  // Success!\n\n  // Procedure call - Drop Check - This checks course drops\n  $dropCheck.$post({\n    stu_pidm: document.getElementById('pbid-PassPIDM').value,\n    user_source: document.getElementById('pbid-UserSource').value,\n    drops_in: null,\n    changes_in: null,\n    passcode_in: null\n  },\n  null,\n  function(response) {\n    // Success!\n\n    document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n    document.getElementById('pbid-UserButton').click();\n\n    // Show the BlockCourseAddEntry and BlockCourseDrop objects\n    $BlockCourseAddEntry.$visible = true;\n    $BlockNull03.$visible = true;\n    $BlockCourseDrop.$visible = true;\n\n    // Load Student Information\n    $StuNameID.$load();\n    $AddTermEntry.$load();\n    $AddTrackEntry.$load();\n    $DropGrid.$load({clearCache:true});\n    $AddEntryStuName.$load();\n    $AddEntryStuClass.$load();\n    $AddMessage.$load({clearCache:true});\n    $DropMessage.$load({clearCache:true});\n    $AddButtonText.$load({clearCache:true});\n    $Processing.$load({clearCache:true});\n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    }\n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"AddResetEntry - dropCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n\n},\nfunction(response) {\n  var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n  if (response.data.errors.errorMessage) {\n    errorMsg = response.data.errors.errorMessage;\n  }\n  else if (response.data.errors[0].errorMessage) {\n    errorMsg = response.data.errors[0].errorMessage;\n  } \n  else {\n    errorMsg = errorMessage?errorMessage:response.data;\n  }\n  if (errorMsg) {\n    alert(\"AddResetEntry - studentCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n    return;\n  }\n});\n\n$AddGrid.$load();\n$SearchTermSelect.$load();\n$AddGrid.$load();  // Loading AddGrid twice clears the AddGrid"
+                                    }
+                              ]
+                        }
+                  ],
+                  "label": ""
+            },
+            {
+                  "name": "BlockNull03",
+                  "type": "block",
+                  "style": "blockSpace",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "BlockSpace03",
+                              "type": "literal",
+                              "value": "&nbsp;"
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockCourseDrop",
+                  "type": "block",
+                  "style": "blocks",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "CourseDropLabel",
+                              "type": "literal",
+                              "value": "Course Drops and Track Changes"
+                        },
+                        {
+                              "name": "CourseDropMessageForm",
+                              "type": "form",
+                              "style": "blocks",
+                              "nextButtonLabel": "Next",
+                              "showInitially": false,
+                              "components": [
+                                    {
+                                          "name": "DropMessage",
+                                          "type": "textArea",
+                                          "parameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "model": "getDropMessage.DROP_MESSAGE",
+                                          "onLoad": "// DropMessage - onLoad\n\n// Show or Hide the Drop Message\nif (document.getElementById('pbid-DropMessage').value == '' || document.getElementById('pbid-DropMessage').value == null) {\n  $CourseDropMessageForm.$visible = false;\n}\nelse {\n  $CourseDropMessageForm.$visible = true;\n}",
+                                          "onUpdate": ""
+                                    }
+                              ]
+                        },
+                        {
+                              "name": "CourseDropForm",
+                              "type": "form",
+                              "label": "",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "DropGrid",
+                                          "type": "htable",
+                                          "model": "getDropGrid",
+                                          "parameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "allowNew": false,
+                                          "allowModify": false,
+                                          "allowDelete": false,
+                                          "allowReload": false,
+                                          "pageSize": 20,
+                                          "loadInitially": false,
+                                          "label": "",
+                                          "components": [
+                                                {
+                                                      "name": "Track",
+                                                      "type": "select",
+                                                      "label": "Change",
+                                                      "model": "",
+                                                      "loadInitially": true,
+                                                      "sourceModel": "getGradingTrack",
+                                                      "labelKey": "TRACK_LABEL",
+                                                      "valueKey": "TRACK_VALUE",
+                                                      "sourceParameters": {},
+                                                      "required": false,
+                                                      "onUpdate": "// Track - onUpdate\n\n// Show the DropGrid buttons\ndocument.getElementById('pbid-DropApplyChanges').style.display = 'block';\ndocument.getElementById('pbid-DropReset').style.display = 'block';",
+                                                      "onLoad": ""
+                                                },
+                                                {
+                                                      "name": "CRN",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "CRN",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "CourseID",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "COURSE",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "Title",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "TITLE",
+                                                      "loadInitially": false,
+                                                      "style": "",
+                                                      "onLoad": "",
+                                                      "asHtml": true,
+                                                      "labelStyle": "",
+                                                      "valueStyle": ""
+                                                },
+                                                {
+                                                      "name": "Block",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "BLOCK",
+                                                      "loadInitially": false,
+                                                      "asHtml": true,
+                                                      "onLoad": ""
+                                                },
+                                                {
+                                                      "name": "Units",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "UNITS",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "Instructor",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "INSTRUCTOR",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "Location",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "LOCATION",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "Dates",
+                                                      "type": "display",
+                                                      "label": "",
+                                                      "model": "DATES",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "Term",
+                                                      "type": "hidden",
+                                                      "model": "ACADPERIOD",
+                                                      "loadInitially": false
+                                                },
+                                                {
+                                                      "name": "RegStatus",
+                                                      "type": "hidden",
+                                                      "model": "REGSTATUS",
+                                                      "loadInitially": false
+                                                },
+                                                {
+                                                      "name": "DradType",
+                                                      "type": "hidden",
+                                                      "model": "DRADTYPE",
+                                                      "loadInitially": true
+                                                },
+                                                {
+                                                      "name": "DradNo",
+                                                      "type": "hidden",
+                                                      "model": "DRADNO",
+                                                      "loadInitially": true
+                                                },
+                                                {
+                                                      "name": "Override",
+                                                      "type": "hidden",
+                                                      "model": "OVERRIDE",
+                                                      "loadInitially": true
+                                                },
+                                                {
+                                                      "name": "TrackLabel",
+                                                      "type": "hidden",
+                                                      "model": "TRACKDESC",
+                                                      "loadInitially": true
+                                                },
+                                                {
+                                                      "name": "ConsentReq",
+                                                      "type": "hidden",
+                                                      "model": "DRADCONSENTREQ",
+                                                      "loadInitially": true
+                                                },
+                                                {
+                                                      "name": "ConsentCode",
+                                                      "type": "hidden",
+                                                      "model": "CONSENTCODE",
+                                                      "loadInitially": true
+                                                }
+                                          ],
+                                          "onLoad": "// DropGrid - onLoad\n\ndocument.getElementById('pbid-UserButton').click();\n\nvar table = document.getElementById(\"pbid-DropGrid\");\nvar userSource = document.getElementById(\"pbid-UserSource\").value;\nvar regStatus = '';\nvar dradType = '';\nvar dradNo = '';\nvar override = '';\nvar trackLabel = '';\nvar consentReg = '';\nvar i = 0;\nvar j = 0;\n\n// Initially Hide the DropGrid buttons\ndocument.getElementById('pbid-DropApplyChanges').style.display = 'none';\ndocument.getElementById('pbid-DropReset').style.display = 'none';\n\n// Populate Track select labels and values\n$Track.$load();\ndocument.getElementById('pbid-UserButton').click();\n\n// Validate student has course data\nif (table.rows.length > 1) {\n  // When table.rows.length = 1, then ignore because the first time in this gets executed twice, its weird\n  if (table.rows.length - 1 < 2) {\n    // Student has no course data, hide drop section and end this script\n    $BlockCourseDrop.$visible = false;\n    return;\n  }\n}\n\n// Loop through all DropGrid rows\nfor (i=0; i<table.rows.length-1; i++) {\n\n  regStatus = $DropGrid.$data[i].REGSTATUS;\n  dradType = $DropGrid.$data[i].DRADTYPE;\n  dradHide = $DropGrid.$data[i].DRADHIDE;\n  override = $DropGrid.$data[i].OVERRIDE;  // Registrars can override except when this equals N\n  trackLabel = $DropGrid.$data[i].TRACKDESC;\n  consentReq = $DropGrid.$data[i].DRADCONSENTREQ;\nconsole.log(\"row=\" + i + \" regStatus=\" + regStatus);\n  // Show or Hide the Track Select Lists based on regStatus, dradNo, dradType and override\n  if (regStatus == 'RE' || regStatus == 'WL') {\n    if (userSource == 'R') {\n      // Registrar User\n      if (override == 'N') {  // Registrars can not override\n        if (dradHide == 'Y' || dradType == 'B') {\n          document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // Course Limitation - Hide\n        }\n        else if (dradType == 'C' || dradType == 'D' || dradType == null) {\n\n          if (dradType == 'D' && dradHide == 'Y') {\n            // Remove Drop option\n            document.getElementById(\"pbid-Track-\" + i).remove(3);\n          }\n\n          if (dradType == 'C' && dradHide == 'Y') {\n            // Remove Track Change options\n            document.getElementById(\"pbid-Track-\" + i).remove(0);\n            document.getElementById(\"pbid-Track-\" + i).remove(1);\n            document.getElementById(\"pbid-Track-\" + i).remove(2);\n          }\n\n          if (document.getElementById(\"pbid-Track-\" + i).length) {\n            document.getElementById(\"pbid-Track-\" + i).style.display = \"block\";  // Ok to Change - Show\n          }\n          else {\n            document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // No options - Hide\n          }\n        }\n        else {\n          document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // None of the above - Hide\n        }\n      }\n      else {\n        document.getElementById(\"pbid-Track-\" + i).style.display = \"block\";  // Registrars can override - Show\n      }\n    }\n    else {\n      // Student User\n      if (dradHide == 'Y' || dradType == 'B') {\n        document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // Course Limitation - Hide\n      }\n      else if (dradType == 'C' || dradType == null) {\n        document.getElementById(\"pbid-Track-\" + i).style.display = \"block\";  // Ok to Change - Show\n      }\n      else {\n        document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // None of the above - Hide\n      }\n    }\n  }\n  else {\n    document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // Non-Course Output - Hide\n  }\n\n  // Select Grading Track option based on database value\n  document.getElementById(\"pbid-Track-\" + i).remove(0);  // Remove first option, it's blank\n  for (j=0; j < document.getElementById(\"pbid-Track-\" + i).options.length; j++) {\n    if (document.getElementById(\"pbid-Track-\" + i).options[j].text == trackLabel) {\n      document.getElementById(\"pbid-Track-\" + i).selectedIndex = j;\n      break;\n    }\n  }\n\n  // Mark checkbox with gold shadow to indicated consent requirement \n  if (consentReq == 'Y') {\n      document.getElementById(\"pbid-Track-container-\" + i).style.boxShadow = '0px 0px 3px 2px gold';\n  }\n\n}  // Close For Loop\n\n// Students are not allowed to change their Grading Track to Audit\nif (userSource == 'S') {  // Student\n  for (i=0; i<table.rows.length-1; i++) {  // Loop through all DropGrid rows\n    trackLabel = document.getElementById(\"pbid-Track-\" + i);\n    if (trackLabel.options[trackLabel.selectedIndex].innerHTML != \"Audit\") {\n      document.getElementById(\"pbid-Track-\" + i).remove(2);  // Remove the Audit option\n    }\n  }\n}\n\n// Temporary Code for initial Summer release\n//var term = '';\n//for (i=0; i<table.rows.length-1; i++) {  // Loop through all DropGrid rows\n//  term = $DropGrid.$data[i].ACADPERIOD;\n//  if (term != \"201730\") {\n//    document.getElementById(\"pbid-Track-\" + i).style.display = \"none\";  // Hide Track select list\n//  }\n//}\n\ndocument.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Course Drops and Grading Track Changes\";\n\ndocument.getElementById('pbid-UserButton').click();",
+                                          "onClick": "",
+                                          "style": "",
+                                          "newRecordLabel": ""
+                                    },
+                                    {
+                                          "name": "StuNameID",
+                                          "type": "text",
+                                          "model": "getStudent.STU_NAME_ID",
+                                          "parameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "loadInitially": false,
+                                          "onLoad": "// StuNameID - onLoad\n\ndocument.getElementById(\"pbid-StuNameID-container\").style.display = \"none\";",
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false
+                                    }
+                              ],
+                              "submitLabel": "",
+                              "submit": "",
+                              "style": "",
+                              "documentation": ""
+                        },
+                        {
+                              "name": "DropCourseButtonsForm",
+                              "type": "form",
+                              "style": "blockAddEntry",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "DropApplyChanges",
+                                          "type": "button",
+                                          "label": "Apply Drops and Grading Track Changes",
+                                          "onClick": "// DropApplyChanges - Button - onClick\n\n// Building 3 Arrays\n//   dropIn - Courses to be dropped\n//   changesIn - Grading Tracks to be changed\n//   dropPasscodeIn - Consent Passcodes as needed for a course drop\n\nvar table = document.getElementById(\"pbid-DropGrid\");\nvar i = 0;\nvar summerDropFound = 0;\nvar dropsIn = '';\nvar changesIn = '';\nvar dropPasscodeIn = '';\nvar trackLabel = '';\nvar trk;\nvar paws;\nvar term = '';\nvar dropConfirmNormalMsg = \"Are you sure you want to apply this change? You may be releasing this seat.  If the class is full, rejoining this class might place you on the waiting-list.\";\nvar dropConfirmSummerMsg = 'FINANCIAL RESPONSIBILITY\\n\\nStudents may drop a summer on-campus course three (3) weeks before the course start date with no tuition penalty. When a student drops after three (3) weeks prior to the start date, or up to the third day of the course, 30% of tuition is charged. When a student drops a course after the third day of the block, 100% of tuition is charged. In the case that the Wild Card is available, one may forfeit the Wild Card in lieu of tuition charges.';\nvar dropConfirmMsg = '';\n\n// Loop through all DropGrid rows to find any summer course drop\nfor (i=0; i<table.rows.length-1; i++) {\n  trk = document.getElementById(\"pbid-Track-\" + i);\n  term = $DropGrid.$data[i].ACADPERIOD;\n  if (trk.options[trk.selectedIndex].text == 'Drop' && term.substring(4,6) == '30') {\n    summerDropFound = 1;\n    break;\n  }\n}\n\n// Assign the appropreiate drop confirmation message\nif (summerDropFound) {\n  dropConfirmMsg = dropConfirmNormalMsg + '\\n\\n' + dropConfirmSummerMsg;\n}\nelse {\n  dropConfirmMsg = dropConfirmNormalMsg;\n}\n\n// Prompt user to verify changes\nif (confirm(dropConfirmMsg) == true) {\n\n  // Process Drops and/or Grading Track Changes\n\n  // Hide the Add and Drop sections and show the ProcessingData section\n  $BlockCourseAddEntry.$visible = false;\n  $BlockNull03.$visible = false;\n  $BlockCourseDrop.$visible = false;\n  $ProcessingData.$visible = true;\n\n  // Loop through all DropGrid rows to build the arrays\n  for (i=0; i<table.rows.length-1; i++) {\n\n    trackLabel = $DropGrid.$data[i].TRACKDESC;\n\n    trk = document.getElementById(\"pbid-Track-\" + i);\n\n    if (trk.options[trk.selectedIndex].text == \"Drop\") {\n\n      // Course being dropped\n\n      if ($DropGrid.$data[i].DRADCONSENTREQ == 'Y') {\n        // Course being dropped requires consent\n\n        // Prompt user for course consent code and store entry back into DRADCONSENTREQ\n        consentCode = prompt(\"Consent required for CRN \" + $DropGrid.$data[i].CRN + \".\", $DropGrid.$data[i].CONSENTCODE);\n\n        if (consentCode == null) {\n          // Prompt's Cancel button pressed, clear out consent code\n          $DropGrid.$data[i].CONSENTCODE = '';\n        }\n        else {\n          // Prompt's OK button pressed.  Save the entered consent code.\n          $DropGrid.$data[i].CONSENTCODE = consentCode;\n        }\n      }\n      else {\n        $DropGrid.$data[i].CONSENTCODE = '';\n      }\n\n      // Assign dropIn and dropPasscodeIn arrays\n      dropsIn = dropsIn + $DropGrid.$data[i].ACADPERIOD + $DropGrid.$data[i].CRN + \",\";\n      if ($DropGrid.$data[i].CONSENTCODE != null && $DropGrid.$data[i].CONSENTCODE != '') {\n        dropPasscodeIn = dropPasscodeIn + $DropGrid.$data[i].ACADPERIOD + $DropGrid.$data[i].CRN + $DropGrid.$data[i].CONSENTCODE + \",\";\n      }\n    }\n    else {\n\n      // Assign changesIn array\n      if (document.getElementById(\"pbid-Track-\" + i).style.display == 'block') {\n        if (trk.options[trk.selectedIndex].text != trackLabel) {\n\n          // Grading Track change\n\n          changesIn = changesIn + $DropGrid.$data[i].ACADPERIOD + $DropGrid.$data[i].CRN + trk.options[trk.selectedIndex].value.slice(-1) + \",\";\n        }\n      }\n    }      // Close Drop and Track Change if\n  }        // Close For Loop\n\n  // Procedure call - Drop Check - This checks course drops\n  $dropCheck.$post({\n    stu_pidm: $PassPIDM,\n    user_source: document.getElementById('pbid-UserSource').value,\n    drops_in: dropsIn,\n    changes_in: changesIn,\n    passcode_in: dropPasscodeIn\n  },\n  null,\n  function(response) {\n    // Success!\n\n    document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n    document.getElementById('pbid-UserButton').click();\n\n    // Show the Add and Drop sections and hide the ProcessingData section\n    $BlockCourseAddEntry.$visible = true;\n    $BlockNull03.$visible = true;\n    $BlockCourseDrop.$visible = true;\n    $ProcessingData.$visible = false;\n\n    // Show the BlockCourseAddEntry and BlockCourseDrop objects\n    $BlockCourseAddEntry.$visible = true;\n    $BlockNull03.$visible = true;\n    $BlockCourseDrop.$visible = true;\n\n    // Load Student Information\n    $DropGrid.$load({clearCache:true});\n    $DropMessage.$load({clearCache:true});\n    $AddButtonText.$load({clearCache:true});\n    $Processing.$load({clearCache:true});\n\n    // Refresh the Drop Add Data\n    document.getElementById('pbid-RefreshDropAddData').click();\n    document.getElementById('pbid-RefreshDropAddData').click();\n\n    // Hide the DropGrid buttons\n    document.getElementById('pbid-DropApplyChanges').style.display = 'none';\n    document.getElementById('pbid-DropReset').style.display = 'none';\n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    }\n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n\n      // Show the Add and Drop sections and hide the ProcessingData section\n      $BlockCourseAddEntry.$visible = true;\n      $BlockNull03.$visible = true;\n      $BlockCourseDrop.$visible = true;\n      $ProcessingData.$visible = false;\n\n      alert(\"DropApplyChanges - onClick - dropCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n}\nelse {\n\n  // Confirm's Cancel button clicked.  Reset the DropGrid.\n\n  // Loop through all DropGrid rows\n  for (i=0; i<table.rows.length-1; i++) {\n    $DropGrid.$data[i].CONSENTCODE = '';\n    $DropGrid.$data[i].DROPCHECKBOX = '0';\n  }\n\n  document.getElementById(\"pbid-CourseDropForm\").reset();\n\n  // Procedure call - Student Check - This loads the SZRDRAD table\n  $studentCheck.$post({\n    stu_pidm: document.getElementById('pbid-PassPIDM').value,\n    user_source: document.getElementById('pbid-UserSource').value\n  },\n  null,\n  function(response) {\n    // Success!\n\n    // Procedure call - Drop Check - This checks course drops\n    $dropCheck.$post({\n      stu_pidm: document.getElementById('pbid-PassPIDM').value,\n      user_source: document.getElementById('pbid-UserSource').value,\n      drops_in: null,\n      changes_in: null,\n      passcode_in: null\n    },\n    null,\n    function(response) {\n      // Success!\n\n      document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n      document.getElementById('pbid-UserButton').click();\n\n      // Show the BlockCourseAddEntry and BlockCourseDrop objects\n      $BlockCourseAddEntry.$visible = true;\n      $BlockNull03.$visible = true;\n      $BlockCourseDrop.$visible = true;\n\n      // Load Student Information\n      $StuNameID.$load();\n      $AddTermEntry.$load();\n      $AddTrackEntry.$load();\n      $DropGrid.$load({clearCache:true});\n      $AddEntryStuName.$load();\n      $AddEntryStuClass.$load();\n      $AddMessage.$load({clearCache:true});\n      $DropMessage.$load({clearCache:true});\n      $AddButtonText.$load({clearCache:true});\n      $Processing.$load({clearCache:true});\n\n      // Hide the DropGrid buttons\n      document.getElementById('pbid-DropApplyChanges').style.display = 'none';\n      document.getElementById('pbid-DropReset').style.display = 'none';\n    },\n    function(response) {\n      var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n      if (response.data.errors.errorMessage) {\n        errorMsg = response.data.errors.errorMessage;\n      }\n      else if (response.data.errors[0].errorMessage) {\n        errorMsg = response.data.errors[0].errorMessage;\n      }\n      else {\n        errorMsg = errorMessage?errorMessage:response.data;\n      }\n      if (errorMsg) {\n        alert(\"DropApplyChanges - onClick - dropCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n        return;\n      }\n    });\n\n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    } \n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"DropApplyChanges - onClick - studentCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n}"
+                                    },
+                                    {
+                                          "name": "DropReset",
+                                          "type": "button",
+                                          "label": "Cancel",
+                                          "onClick": "// DropReset - onClick\n\nvar table = document.getElementById(\"pbid-DropGrid\");\nvar i = 0;\n\n// Loop through all DropGrid rows\nfor (i=0; i<table.rows.length-1; i++) {\n  $DropGrid.$data[i].CONSENTCODE = '';\n  $DropGrid.$data[i].DROPCHECKBOX = '0';\n}\n\ndocument.getElementById(\"pbid-CourseDropForm\").reset();\n\n// Procedure call - Student Check - This loads the SZRDRAD table\n$studentCheck.$post({\n  stu_pidm: document.getElementById('pbid-PassPIDM').value,\n  user_source: document.getElementById('pbid-UserSource').value\n},\nnull,\nfunction(response) {\n  // Success!\n\n  // Procedure call - Drop Check - This checks course drops\n  $dropCheck.$post({\n    stu_pidm: document.getElementById('pbid-PassPIDM').value,\n    user_source: document.getElementById('pbid-UserSource').value,\n    drops_in: null,\n    changes_in: null,\n    passcode_in: null\n  },\n  null,\n  function(response) {\n    // Success!\n\n    document.getElementById(\"pbid-CourseDropLabel\").innerHTML = \"Loading...\";\n    document.getElementById('pbid-UserButton').click();\n\n    // Show the BlockCourseAddEntry and BlockCourseDrop objects\n    $BlockCourseAddEntry.$visible = true;\n    $BlockNull03.$visible = true;\n    $BlockCourseDrop.$visible = true;\n\n    // Load Student Information\n    $StuNameID.$load();\n    $AddTermEntry.$load();\n    $AddTrackEntry.$load();\n    $DropGrid.$load({clearCache:true});\n    $AddEntryStuName.$load();\n    $AddEntryStuClass.$load();\n    $AddMessage.$load({clearCache:true});\n    $DropMessage.$load({clearCache:true});\n    $AddButtonText.$load({clearCache:true});\n    $Processing.$load({clearCache:true});\n\n    // Hide the DropGrid buttons\n    document.getElementById('pbid-DropApplyChanges').style.display = 'none';\n    document.getElementById('pbid-DropReset').style.display = 'none';\n  },\n  function(response) {\n    var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n    if (response.data.errors.errorMessage) {\n      errorMsg = response.data.errors.errorMessage;\n    }\n    else if (response.data.errors[0].errorMessage) {\n      errorMsg = response.data.errors[0].errorMessage;\n    }\n    else {\n      errorMsg = errorMessage?errorMessage:response.data;\n    }\n    if (errorMsg) {\n      alert(\"DropReset - dropCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n      return;\n    }\n  });\n\n},\nfunction(response) {\n  var errorMessage = response.data.errors?response.data.errors.errorMessage:null;\n  if (response.data.errors.errorMessage) {\n    errorMsg = response.data.errors.errorMessage;\n  }\n  else if (response.data.errors[0].errorMessage) {\n    errorMsg = response.data.errors[0].errorMessage;\n  } \n  else {\n    errorMsg = errorMessage?errorMessage:response.data;\n  }\n  if (errorMsg) {\n    alert(\"DropReset - studentCheck Error: \" + errorMsg,{type:\"error\"});  // Display Error\n    return;\n  }\n});"
+                                    }
+                              ]
+                        }
+                  ],
+                  "label": ""
+            },
+            {
+                  "name": "BlockNull04",
+                  "type": "block",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "BlockSpace04",
+                              "type": "literal",
+                              "value": "&nbsp;"
+                        }
+                  ],
+                  "style": "blockSpace"
+            },
+            {
+                  "name": "BlockClassSearch",
+                  "type": "block",
+                  "style": "blockForm",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "ClassSearch",
+                              "type": "form",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "SearchTermSelect",
+                                          "type": "select",
+                                          "sourceModel": "getSchedTerms",
+                                          "labelKey": "TERM_LABEL",
+                                          "valueKey": "TERM_VALUE",
+                                          "sourceParameters": {
+                                                "stu_pidm": "$PassPIDM"
+                                          },
+                                          "required": false,
+                                          "loadInitially": false,
+                                          "label": "Term",
+                                          "placeholder": "&nbsp;",
+                                          "onUpdate": "// SearchTermSelect - onUpdate\n\n// Indicate SearchBlockSelect and SearchInstructorSelect are loading\ndocument.getElementById('pbid-SearchBlockSelect').options[0].text = 'Loading...';\ndocument.getElementById('pbid-SearchInstructorSelect').options[0].text = 'Loading...';\n\n// Load SearchBlockSelect and SearchInstructorSelect select lists\n$SearchBlockSelect.$load({clearCache:true});\n$SearchInstructorSelect.$load({clearCache:true});",
+                                          "onLoad": ""
+                                    },
+                                    {
+                                          "name": "SearchSubjectSelect",
+                                          "type": "select",
+                                          "sourceModel": "getSubjects",
+                                          "labelKey": "SUBJECT_LABEL",
+                                          "valueKey": "SUBJECT_VALUE",
+                                          "label": "Subject",
+                                          "sourceParameters": {},
+                                          "required": false,
+                                          "placeholder": "&nbsp;",
+                                          "loadInitially": false,
+                                          "onLoad": "// SearchSubjectSelect - onLoad\n\ndocument.getElementById('pbid-SearchSubjectSelect').options[0].text = '';"
+                                    },
+                                    {
+                                          "name": "SearchCourseNumber",
+                                          "type": "text",
+                                          "label": "Course Reference Number",
+                                          "parameters": {},
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": true,
+                                          "onLoad": ""
+                                    },
+                                    {
+                                          "name": "SearchCourseID",
+                                          "type": "text",
+                                          "label": "Course ID",
+                                          "parameters": {},
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": true
+                                    },
+                                    {
+                                          "name": "SearchCourseTitle",
+                                          "type": "text",
+                                          "label": "Course Title",
+                                          "parameters": {},
+                                          "validation": {},
+                                          "readonly": false,
+                                          "required": false,
+                                          "loadInitially": true
+                                    },
+                                    {
+                                          "name": "SearchBlockSelect",
+                                          "type": "select",
+                                          "sourceModel": "getBlocks",
+                                          "labelKey": "BLOCK_LABEL",
+                                          "valueKey": "BLOCK_VALUE",
+                                          "label": "Block",
+                                          "sourceParameters": {
+                                                "search_term": "$SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null"
+                                          },
+                                          "required": false,
+                                          "placeholder": "&nbsp;",
+                                          "loadInitially": false,
+                                          "value": "",
+                                          "onLoad": "// SearchBlockSelect - onLoad\n\ndocument.getElementById('pbid-UserButton').click();\n\ndocument.getElementById('pbid-SearchBlockSelect').options[0].text = '';",
+                                          "onUpdate": ""
+                                    },
+                                    {
+                                          "name": "SearchInstructorSelect",
+                                          "type": "select",
+                                          "sourceModel": "getInstructors",
+                                          "labelKey": "INSTR_LABEL",
+                                          "valueKey": "INSTR_VALUE",
+                                          "label": "Instructor",
+                                          "sourceParameters": {
+                                                "search_term": "$SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null"
+                                          },
+                                          "required": false,
+                                          "placeholder": "&nbsp;",
+                                          "loadInitially": false,
+                                          "onLoad": "// SearchInstructorSelect - onLoad\n\ndocument.getElementById('pbid-UserButton').click();\n\ndocument.getElementById('pbid-SearchInstructorSelect').options[0].text = '';"
+                                    },
+                                    {
+                                          "name": "SearchDegReqSelect",
+                                          "type": "select",
+                                          "sourceModel": "getDegreeRequirements",
+                                          "labelKey": "DEGREQ_LABEL",
+                                          "valueKey": "DEGREQ_VALUE",
+                                          "label": "Degree Requirement",
+                                          "sourceParameters": {},
+                                          "required": false,
+                                          "placeholder": "&nbsp;",
+                                          "loadInitially": false,
+                                          "onLoad": "// SearchDegReqSelect - onLoad\n\ndocument.getElementById('pbid-SearchDegReqSelect').options[0].text = '';"
+                                    },
+                                    {
+                                          "name": "SearchCampusSelect",
+                                          "type": "select",
+                                          "sourceModel": "getCampuses",
+                                          "labelKey": "CAMPUS_LABEL",
+                                          "valueKey": "CAMPUS_VALUE",
+                                          "label": "Campus",
+                                          "sourceParameters": {},
+                                          "required": false,
+                                          "placeholder": "&nbsp;",
+                                          "loadInitially": false,
+                                          "onLoad": "// SearchCampusSelect - onLoad\n\ndocument.getElementById('pbid-SearchCampusSelect').options[0].text = '';"
+                                    }
+                              ],
+                              "label": "Class Schedule Search (200 results max)",
+                              "submitLabel": "Class Search",
+                              "submit": "// ClassSearch - submit\n\n// Edits\n\nif (document.getElementById('pbid-SearchTermSelect').options.selectedIndex == 0)  {\n  alert(\"Please select a term.\", {flash: true,type:\"error\"});\n  document.getElementById('pbid-SearchTermSelect').focus();\n  return;\n}\n\n\ndocument.getElementById(\"pbid-CourseAddSearchLabel\").innerHTML = \"Loading...\";\n\n$AddGrid.$load({clearCache:true});"
+                        }
+                  ]
+            },
+            {
+                  "name": "BlockNull05",
+                  "type": "block",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "BlockSpace06",
+                              "type": "literal",
+                              "value": "&nbsp;"
+                        }
+                  ],
+                  "style": "blockSpace"
+            },
+            {
+                  "name": "BlockCourseAdd",
+                  "type": "block",
+                  "style": "blocks",
+                  "showInitially": false,
+                  "components": [
+                        {
+                              "name": "CourseAddSearchLabel",
+                              "type": "literal",
+                              "value": "Choose class schedule criteria to view available courses"
+                        },
+                        {
+                              "name": "CourseAddForm",
+                              "type": "form",
+                              "label": "",
+                              "nextButtonLabel": "Next",
+                              "showInitially": true,
+                              "components": [
+                                    {
+                                          "name": "AddGrid",
+                                          "type": "htable",
+                                          "model": "getAddGrid",
+                                          "parameters": {
+                                                "search_block": "$SearchBlockSelect.$selected?$SearchBlockSelect.$selected.BLOCK_VALUE:null",
+                                                "search_term": "$SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null",
+                                                "search_crn": "$SearchCourseNumber",
+                                                "search_course_id": "$SearchCourseID",
+                                                "search_title": "$SearchCourseTitle",
+                                                "search_subject": "$SearchSubjectSelect.$selected?$SearchSubjectSelect.$selected.SUBJECT_VALUE:null",
+                                                "search_instr": "$SearchInstructorSelect.$selected?$SearchInstructorSelect.$selected.INSTR_VALUE:null",
+                                                "search_degreq": "$SearchDegReqSelect.$selected?$SearchDegReqSelect.$selected.DEGREQ_VALUE:null",
+                                                "search_campus": "$SearchCampusSelect.$selected?$SearchCampusSelect.$selected.CAMPUS_VALUE:null"
+                                          },
+                                          "allowNew": false,
+                                          "allowModify": false,
+                                          "allowDelete": false,
+                                          "allowReload": false,
+                                          "pageSize": 250,
+                                          "loadInitially": false,
+                                          "components": [
+                                                {
+                                                      "name": "AddCourse",
+                                                      "type": "boolean",
+                                                      "label": "",
+                                                      "loadInitially": true,
+                                                      "booleanTrueValue": "1",
+                                                      "booleanFalseValue": "0",
+                                                      "readonly": false,
+                                                      "onUpdate": "// AddCourse - onUpdate\n\nvar rows = $AddGrid.$data.length;\nvar i = 0;\nvar k = 0;\n\n// Loop through all AddGrid rows\nfor (i=0; i<rows; i++) {\n\n  if (document.getElementById(\"pbid-AddCourse-\" + i).checked) {\n\n    // User checked an AddGrid's AddCourse checkbox\n\n    // Set Term within the AddEntryForm\n    for(k=0; k<document.getElementById('pbid-AddTermEntry').options.length; k++) {\n      if (document.getElementById('pbid-AddTermEntry').options[k].innerHTML == $AddGrid.$data[i].TERM) {\n        document.getElementById('pbid-AddTermEntry').selectedIndex = k;\n        break;\n      }\n    }\n\n    // Set the CRN within the AddEntryForm\n    $AddCRNEntry = $AddGrid.$data[i].CRN;\n\n    // Hide the Class Schedule Search and Class Schedule Search Results sections\n    $BlockNull04.$visible = false;\n    $BlockClassSearch.$visible = false;\n    $BlockCourseAdd.$visible = false;\n\n    // Reset the Class Search Results form\n    document.getElementById(\"pbid-AddCourse-\" + i).click();  // Maintain state of checkbox\n    document.getElementById(\"pbid-CourseAddForm\").reset();\n\n    break;\n  }\n}",
+                                                      "onLoad": "",
+                                                      "model": ""
+                                                },
+                                                {
+                                                      "name": "AddCRN",
+                                                      "type": "display",
+                                                      "model": "CRN",
+                                                      "loadInitially": false,
+                                                      "asHtml": true,
+                                                      "documentation": "",
+                                                      "onLoad": ""
+                                                },
+                                                {
+                                                      "name": "AddCourseID",
+                                                      "type": "display",
+                                                      "model": "COURSE_ID",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddTitle",
+                                                      "type": "display",
+                                                      "model": "TITLE",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddBlock",
+                                                      "type": "display",
+                                                      "model": "BLOCK",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddDates",
+                                                      "type": "display",
+                                                      "model": "DATES",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddTime",
+                                                      "type": "display",
+                                                      "model": "SESSION_TIME",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddUnits",
+                                                      "type": "display",
+                                                      "model": "UNITS",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddInstructor",
+                                                      "type": "display",
+                                                      "model": "INSTRUCTOR",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddLimit",
+                                                      "type": "display",
+                                                      "model": "LIMIT",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddReserved",
+                                                      "type": "display",
+                                                      "model": "RESERVED",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddClassSize",
+                                                      "type": "display",
+                                                      "model": "CLASS_SIZE",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddAvailable",
+                                                      "type": "display",
+                                                      "model": "AVAILABLE",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddWaitList",
+                                                      "type": "display",
+                                                      "model": "WAIT_LIST",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddLocation",
+                                                      "type": "display",
+                                                      "model": "LOCATION",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddDegReq",
+                                                      "type": "display",
+                                                      "model": "DEG_REQ",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                },
+                                                {
+                                                      "name": "AddCampus",
+                                                      "type": "display",
+                                                      "model": "CAMPUS",
+                                                      "loadInitially": false,
+                                                      "asHtml": true
+                                                }
+                                          ],
+                                          "label": "",
+                                          "onLoad": "// AddGrid - onLoad\n\n// Set AddGrid Label\n\nvar termSelected = $SearchTermSelect.$selected?$SearchTermSelect.$selected.TERM_VALUE:null;\n\nif (termSelected == null) {\n  document.getElementById(\"pbid-CourseAddSearchLabel\").innerHTML = \"Choose class schedule criteria to view available courses.\";\n}\nelse {\n  document.getElementById(\"pbid-CourseAddSearchLabel\").innerHTML = \"Class Schedule Search Course Results\";\n}\n\n\n// Turn off the checkboxes for non-course rows\n\ndocument.getElementById('pbid-UserButton').click();\n\nvar table = document.getElementById(\"pbid-AddGrid\");\nvar CRN = '';\nvar i = 0;\n\n// Loop through all AddGrid rows\nfor (i=0; i<table.rows.length-1; i++) {\n\n  CRN = $AddGrid.$data[i].CRN;\n\n  if (CRN == '<b>CRN</b>' || CRN == '' || CRN == null) {\n    document.getElementById(\"pbid-AddCourse-\" + i).style.display = \"none\";  // Hide Checkbox\n  }\n\n}  // Close For Loop\n\ndocument.getElementById('pbid-UserButton').click();",
+                                          "onClick": ""
+                                    }
+                              ]
+                        }
+                  ]
+            }
+      ],
+      "style": "",
+      "importCSS": "ccStyleStuDropAdd",
+      "documentation": ""
+}
