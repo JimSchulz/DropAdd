@@ -60,7 +60,8 @@ if (stuSelect != null) {
       document.getElementById("pbid-CourseDropLabel").innerHTML = "Loading...";
       document.getElementById('pbid-UserButton').click();
 
-      // Hide DropCourseButtonsForm
+      // Hide CourseDropForm  & DropCourseButtonsForm
+      $CourseDropForm.$visible = false;
       $DropCourseButtonsForm.$visible = false;
 
       // Show the BlockCourseAddEntry and BlockCourseDrop objects
