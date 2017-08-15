@@ -13,10 +13,6 @@ var consentReg = '';
 var i = 0;
 var j = 0;
 
-// Initially Hide the DropGrid buttons
-document.getElementById('pbid-DropApplyChanges').style.display = 'none';
-document.getElementById('pbid-DropReset').style.display = 'none';
-
 // Populate Track select labels and values
 $Track.$load();
 document.getElementById('pbid-UserButton').click();
@@ -40,7 +36,7 @@ for (i=0; i<table.rows.length-1; i++) {
   override = $DropGrid.$data[i].OVERRIDE;  // Registrars can override except when this equals N
   trackLabel = $DropGrid.$data[i].TRACKDESC;
   consentReq = $DropGrid.$data[i].DRADCONSENTREQ;
-console.log("row=" + i + " regStatus=" + regStatus);
+  
   // Show or Hide the Track Select Lists based on regStatus, dradNo, dradType and override
   if (regStatus == 'RE' || regStatus == 'WL') {
     if (userSource == 'R') {
@@ -130,6 +126,10 @@ if (userSource == 'S') {  // Student
 //  }
 //}
 
+// Assgin table label
 document.getElementById("pbid-CourseDropLabel").innerHTML = "Course Drops and Grading Track Changes";
+
+// Show DropCourseButtonsForm
+$DropCourseButtonsForm.$visible = true;
 
 document.getElementById('pbid-UserButton').click();
